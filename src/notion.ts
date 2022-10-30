@@ -1,7 +1,7 @@
 import { Client } from "@notionhq/client";
 import { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints.js";
 import { sample } from "lodash-es";
-import { getDate } from "date-fns";
+import { formatISO, getDate, subMonths } from "date-fns";
 import { Entry } from "./types.js";
 
 type PageProperty = PageObjectResponse["properties"][string];
@@ -16,6 +16,7 @@ const client = new Client({
 });
 
 export const getEntries = async (): Promise<Entry[]> => {
+  const now = new Date();
   const willNotifyPosts = await client.databases.query({
     database_id: process.env.CALENDAR_ID,
     filter: {
@@ -23,7 +24,8 @@ export const getEntries = async (): Promise<Entry[]> => {
         {
           property: "🗓Date",
           date: {
-            past_month: {},
+            after: formatISO(subMonths(now, 1)),
+            on_or_before: formatISO(now),
           },
         },
         {
@@ -94,7 +96,7 @@ export const getEntries = async (): Promise<Entry[]> => {
       title: titleAsPlainText,
       url: externalArticle.url ?? urlForRead,
       writer: writerAsPlainText,
-      date: getDate(new Date(date.date!.start)), // FIXME: タイムゾーンたぶんずれてるけど+9なので日付がずれてない
+      date: getDate(new Date(`${date.date!.start}T00:00:00Z`)),
       imageColor: sample(COLOR_CANDIDATES)!,
     };
   });
