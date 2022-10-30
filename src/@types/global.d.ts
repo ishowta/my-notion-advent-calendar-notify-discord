@@ -5,5 +5,6 @@ declare namespace NodeJS {
     readonly DISCORD_TOKEN: string;
     readonly NOTIFY_CHANNEL: string;
     readonly TITLE: string;
+    readonly DOMAIN: string;
   }
 }

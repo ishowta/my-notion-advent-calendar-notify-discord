@@ -2,7 +2,6 @@ lockfileVersion: 5.4
 
 specifiers:
   '@notionhq/client': ^2.2.1
-  '@types/dotenv-flow': ^3.2.0
   '@types/lodash-es': ^4.17.6
   '@types/node': ^18.11.7
   '@types/promise-sequential': ^1.1.0
@@ -15,7 +14,6 @@ specifiers:
 
 dependencies:
   '@notionhq/client': 2.2.1
-  '@types/dotenv-flow': 3.2.0
   '@types/lodash-es': 4.17.6
   '@types/node': 18.11.7
   '@types/promise-sequential': 1.1.0
@@ -94,10 +92,6 @@ packages:
 
   /@tokenizer/token/0.3.0:
     resolution: {integrity: sha512-OvjF+z51L3ov0OyAU0duzsYuvO01PH7x4t6DJx+guahgTnBHkhJdG7soQeTSFLWN3efnHyibZ4Z8l2EuWwJN3A==}
-    dev: false
-
-  /@types/dotenv-flow/3.2.0:
-    resolution: {integrity: sha512-A79hbPwocbYkcTwGcDOFbKDuqyVo5mLAz/6Iq465YZ7R7Go5bT1PIM8I2jlPQkaD9u9fbotGVLkUPhX+9XUHfw==}
     dev: false
 
   /@types/lodash-es/4.17.6:

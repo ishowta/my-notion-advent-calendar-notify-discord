@@ -1,1 +1,1 @@
-# notion-advent-calendar-notify-discord
+# my-notion-advent-calendar-notify-discord

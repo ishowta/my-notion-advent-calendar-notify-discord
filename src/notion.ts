@@ -16,26 +16,31 @@ const client = new Client({
 });
 
 export const getEntries = async (): Promise<Entry[]> => {
-  /**
-   * 日付が過去一ヶ月以内で
-   * 書き込みが完了済みかつ
-   * 通知状態が完了済みではないポスト
-   */
   const willNotifyPosts = await client.databases.query({
     database_id: process.env.CALENDAR_ID,
     filter: {
       and: [
         {
-          property: "Date",
+          property: "🗓Date",
           date: {
             past_month: {},
           },
         },
         {
-          property: "Status",
-          select: {
-            equals: "Done",
-          },
+          or: [
+            {
+              property: "💾Status",
+              select: {
+                equals: "Done",
+              },
+            },
+            {
+              property: "💾Status",
+              select: {
+                equals: "Free-Writing",
+              },
+            },
+          ],
         },
         {
           property: "NotifyStatus",
@@ -43,11 +48,17 @@ export const getEntries = async (): Promise<Entry[]> => {
             does_not_equal: "Done",
           },
         },
+        {
+          property: "通知",
+          select: {
+            does_not_equal: "しないで欲しい",
+          },
+        },
       ],
     },
     sorts: [
       {
-        property: "Date",
+        property: "🗓Date",
         direction: "ascending",
       },
     ],
@@ -55,11 +66,14 @@ export const getEntries = async (): Promise<Entry[]> => {
 
   const willNotifyEntries = willNotifyPosts.results.map((_post) => {
     const post = _post as PageObjectResponse;
-    const date = post.properties["Date"] as PagePropertyMap["date"];
-    const title = post.properties["Name"] as PagePropertyMap["title"];
+    const date = post.properties["🗓Date"] as PagePropertyMap["date"];
+    const title = post.properties["Title"] as PagePropertyMap["title"];
     const writer = post.properties[
-      "Writer(option)"
+      "✏️Writer(Option)"
     ] as PagePropertyMap["rich_text"];
+    const externalArticle = post.properties[
+      "📄Article(Option)"
+    ] as PagePropertyMap["url"];
     const titleAsPlainText = title.title
       .map((frag) => frag.plain_text)
       .join("");
@@ -67,11 +81,18 @@ export const getEntries = async (): Promise<Entry[]> => {
       writer.rich_text.length === 0
         ? undefined
         : writer.rich_text.map((frag) => frag.plain_text).join("");
+    // notion.soのリンクだと書き込みモードになってしまう（よく分かっていない）のでカスタムドメインで置き換える
+    const urlForRead = post.url.startsWith("https://www.notion.so/")
+      ? post.url.replace(
+          /^https:\/\/www\.notion\.so\//,
+          `https://${process.env.DOMAIN}/`
+        )
+      : post.url;
 
     return {
       id: post.id,
       title: titleAsPlainText,
-      url: post.url,
+      url: externalArticle.url ?? urlForRead,
       writer: writerAsPlainText,
       date: getDate(new Date(date.date!.start)), // FIXME: タイムゾーンたぶんずれてるけど+9なので日付がずれてない
       imageColor: sample(COLOR_CANDIDATES)!,
