@@ -1,7 +1,7 @@
 import { Client } from "@notionhq/client";
 import { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints.js";
 import { sample } from "lodash-es";
-import { formatISO, getDate, subMonths } from "date-fns";
+import { addHours, formatISO, getDate, subMonths } from "date-fns";
 import { Entry } from "./types.js";
 
 type PageProperty = PageObjectResponse["properties"][string];
@@ -24,8 +24,15 @@ export const getEntries = async (): Promise<Entry[]> => {
         {
           property: "🗓Date",
           date: {
-            after: formatISO(subMonths(now, 1)),
-            on_or_before: formatISO(now),
+            // Notionのカレンダーで日付を設定するとUTCの0時0分になってしまうため、9時間ずらす。
+            after: formatISO(addHours(subMonths(now, 1), 9)),
+          },
+        },
+        {
+          property: "🗓Date",
+          date: {
+            // 同じく
+            on_or_before: formatISO(addHours(now, 9)),
           },
         },
         {
