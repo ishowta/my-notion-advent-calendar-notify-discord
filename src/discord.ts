@@ -19,6 +19,11 @@ client.on("ready", async () => {
 
 client.login(process.env.DISCORD_TOKEN);
 
+export const dispose = async () => {
+  await discordLoadPromiseResolver;
+  client.destroy();
+}
+
 export const notifyEntry = async (entry: Entry) => {
   const ch = await discordLoadPromise;
 
