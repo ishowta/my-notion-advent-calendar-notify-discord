@@ -1,16 +1,18 @@
 import sequence from "promise-sequential";
 import { getEntries, markNotified } from "./notion.js";
-import { dispose, notifyEntry } from "./discord.js";
+import { getMainTextChannel, notifyEntry, withDiscord } from "./discord.js";
 
 const entries = await getEntries();
 
 console.log(entries);
 
-await sequence(
-  entries.map((entry) => async () => {
-    await notifyEntry(entry);
-    await markNotified(entry);
-  })
-);
+await withDiscord(async (discord) => {
+  const ch = await getMainTextChannel(discord);
 
-await dispose();
+  await sequence(
+    entries.map((entry) => async () => {
+      await notifyEntry(ch, entry);
+      await markNotified(entry);
+    })
+  );
+});

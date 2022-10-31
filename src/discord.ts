@@ -1,32 +1,33 @@
 import { Client, MessagePayload, TextChannel } from "discord.js";
 import { Entry } from "./types.js";
 
-const client = new Client({
-  intents: [],
-});
+export const withDiscord = <T>(f: (cli: Client) => Promise<T>): Promise<T> => {
+  return new Promise((res) => {
+    const client = new Client({
+      intents: [],
+    });
 
-let discordLoadPromiseResolver: (ch: TextChannel) => void;
-const discordLoadPromise = new Promise<TextChannel>((res) => {
-  discordLoadPromiseResolver = res;
-});
+    client.on("ready", async () => {
+      const result = await f(client);
 
-client.on("ready", async () => {
-  const ch = (await client.channels.fetch(
+      client.destroy();
+
+      res(result);
+    });
+
+    client.login(process.env.DISCORD_TOKEN);
+  });
+};
+
+export const getMainTextChannel = async (cli: Client) => {
+  const ch = (await cli.channels.fetch(
     process.env.NOTIFY_CHANNEL
   )) as TextChannel;
-  discordLoadPromiseResolver(ch);
-});
 
-client.login(process.env.DISCORD_TOKEN);
+  return ch;
+};
 
-export const dispose = async () => {
-  await discordLoadPromiseResolver;
-  client.destroy();
-}
-
-export const notifyEntry = async (entry: Entry) => {
-  const ch = await discordLoadPromise;
-
+export const notifyEntry = async (ch: TextChannel, entry: Entry) => {
   ch.send(
     MessagePayload.create(ch, {
       embeds: [
