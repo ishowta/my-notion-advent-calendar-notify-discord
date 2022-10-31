@@ -1,6 +1,9 @@
-import sequence from "promise-sequential";
 import { getEntries, markNotified } from "./notion.js";
 import { getMainTextChannel, notifyEntry, withDiscord } from "./discord.js";
+
+const sequence = async (arr: (() => Promise<void>)[]) => {
+  return arr.reduce((p, c) => p.then(() => c()), Promise.resolve());
+}
 
 const entries = await getEntries();
 
