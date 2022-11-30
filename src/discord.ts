@@ -36,6 +36,11 @@ export const notifyEntry = async (ch: TextChannel, entry: Entry) => {
           url: entry.url,
           description: `${process.env.TITLE} ${entry.date}日目`,
           color: entry.imageColor,
+          author: entry.writer
+            ? {
+                name: entry.writer,
+              }
+            : undefined,
         },
       ],
     })
