@@ -17,8 +17,16 @@ const client = new Client({
 
 export const getEntries = async (): Promise<Entry[]> => {
   const now = new Date();
-  const willNotifyPosts = await client.databases.query({
-    database_id: process.env.CALENDAR_ID,
+
+  const response = await client.request({
+    method: "get",
+    path: `databases/${process.env.CALENDAR_ID}`,
+  })
+  const dataSources = (response as any).data_sources
+  const dataSource = dataSources[0]
+
+  const willNotifyPosts = await client.dataSources.query({
+    data_source_id: dataSource.id,
     filter: {
       and: [
         {
