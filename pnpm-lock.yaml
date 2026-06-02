@@ -27,8 +27,8 @@ importers:
         specifier: ^3.2.0
         version: 3.3.0
       lodash-es:
-        specifier: ^4.17.21
-        version: 4.17.21
+        specifier: ^4.18.1
+        version: 4.18.1
       promise-sequential:
         specifier: ^1.1.1
         version: 1.1.1
@@ -132,6 +132,7 @@ packages:
   discord.js@14.16.3:
     resolution: {integrity: sha512-EPCWE9OkA9DnFFNrO7Kl1WHHDYFXu3CNVFJg63bfU7hVtjZGyhShwZtSBImINQRWxWP2tgo2XI+QhdXx28r0aA==}
     engines: {node: '>=18'}
+    deprecated: This version is deprecated. Please use a newer version
 
   dotenv-flow@3.3.0:
     resolution: {integrity: sha512-GLSvRqDZ1TGhloS6ZCZ5chdqqv/3XMqZxAnX9rliJiHn6uyJLguKeu+3M2kcagBkoVCnLWYfbR4rfFe1xSU39A==}
@@ -148,8 +149,8 @@ packages:
     resolution: {integrity: sha512-tzN8e4TX8+kkxGPK8D5u0FNmjPUjw3lwC9lSLxxoB/+GtsJG91CO8bSWy73APlgAZzZbXEYZJuxjkHH2w+Ezhw==}
     engines: {node: '>= 6'}
 
-  lodash-es@4.17.21:
-    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
+  lodash-es@4.18.1:
+    resolution: {integrity: sha512-J8xewKD/Gk22OZbhpOVSwcs60zhd95ESDwezOFuA3/099925PdHJ7OFHNTGtajL3AlZkykD32HykiMo+BIBI8A==}
 
   lodash.snakecase@4.1.1:
     resolution: {integrity: sha512-QZ1d4xoBHYUeuouhEq3lk3Uq7ldgyFXGBhg04+oRLnIz8o9T65Eh+8YdroUwn846zchkA9yDsDl5CVVaV2nqYw==}
@@ -362,7 +363,7 @@ snapshots:
       combined-stream: 1.0.8
       mime-types: 2.1.35
 
-  lodash-es@4.17.21: {}
+  lodash-es@4.18.1: {}
 
   lodash.snakecase@4.1.1: {}
 
