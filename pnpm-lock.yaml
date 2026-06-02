@@ -21,8 +21,8 @@ importers:
         specifier: ^18.17.6
         version: 18.19.66
       date-fns:
-        specifier: ^2.30.0
-        version: 2.30.0
+        specifier: ^4.4.0
+        version: 4.4.0
       discord.js:
         specifier: ^14.26.4
         version: 14.26.4
@@ -40,10 +40,6 @@ importers:
         version: 5.7.2
 
 packages:
-
-  '@babel/runtime@7.26.0':
-    resolution: {integrity: sha512-FDSOghenHTiToteC/QRlv2q3DhPZ/oOXTBoirfWNx1Cx3TMVcGWQtMMmQcSvb/JjpNeGzx8Pq/b4fKEJuWm1sw==}
-    engines: {node: '>=6.9.0'}
 
   '@discordjs/builders@1.14.1':
     resolution: {integrity: sha512-gSKkhXLqs96TCzk66VZuHHl8z2bQMJFGwrXC0f33ngK+FLNau4hU1PYny3DNJfNdSH+gVMzE85/d5FQ2BpcNwQ==}
@@ -109,9 +105,8 @@ packages:
     resolution: {integrity: sha512-RaI5qZo6D2CVS6sTHFKg1v5Ohq/+Bo2LZ5gzUEwZ/WkHhwtGTCB/sVLw8ijOkAUxasZ+WshN/Rzj4ywsABJ5ZA==}
     engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
 
-  date-fns@2.30.0:
-    resolution: {integrity: sha512-fnULvOpxnC5/Vg3NCiWelDsLiUc9bRwAPs/+LfTLNvetFCtCTN+yQz15C/fs4AwX1R9K5GLtLfn8QW+dWisaAw==}
-    engines: {node: '>=0.11'}
+  date-fns@4.4.0:
+    resolution: {integrity: sha512-+1UMbeh68lH1SegH83CGWwpb6OHHbpSgr3+s5Eww5M4CAgswBpoWS0AjTOfEJ33HiYKz1hdj/KTFprzXHmq/6w==}
 
   discord-api-types@0.38.48:
     resolution: {integrity: sha512-WFUE/2o0lBlLeCQonQ+Pu2RqHAqbytBJ2RlXR91gzk05InSS6k9ShzzLYoymrA4c2oRgRKGE7/VqQJNNdGWSxQ==}
@@ -146,9 +141,6 @@ packages:
   promise-sequential@1.1.1:
     resolution: {integrity: sha512-gpziThEJPnPEeaHNqjy9f4PE1JwXb07fX3dz+41nhALpIAaEI9VZU8Q89eyBBAa2xAhnz0KgUTDtCA7FZYbZQQ==}
 
-  regenerator-runtime@0.14.1:
-    resolution: {integrity: sha512-dYnhHh0nJoMfnkZs6GmmhFknAGRrLznOu5nc9ML+EJxGvrx6H7teuevqVqCuPcPK//3eDrrjQhehXVx9cnkGdw==}
-
   ts-mixer@6.0.4:
     resolution: {integrity: sha512-ufKpbmrugz5Aou4wcr5Wc1UUFWOLhq+Fm6qa6P0w0K5Qw2yhaUoiWszhCVuNQyNwrlGiscHOmqYoAox1PtvgjA==}
 
@@ -180,10 +172,6 @@ packages:
         optional: true
 
 snapshots:
-
-  '@babel/runtime@7.26.0':
-    dependencies:
-      regenerator-runtime: 0.14.1
 
   '@discordjs/builders@1.14.1':
     dependencies:
@@ -263,9 +251,7 @@ snapshots:
 
   '@vladfrangu/async_event_emitter@2.4.6': {}
 
-  date-fns@2.30.0:
-    dependencies:
-      '@babel/runtime': 7.26.0
+  date-fns@4.4.0: {}
 
   discord-api-types@0.38.48: {}
 
@@ -305,8 +291,6 @@ snapshots:
   magic-bytes.js@1.13.0: {}
 
   promise-sequential@1.1.1: {}
-
-  regenerator-runtime@0.14.1: {}
 
   ts-mixer@6.0.4: {}
 
