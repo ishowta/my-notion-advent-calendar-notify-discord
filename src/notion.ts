@@ -52,7 +52,7 @@ export const getEntries = async (): Promise<Entry[]> => {
           ],
         },
         {
-          property: "NotifyStatus",
+          property: "discord",
           select: {
             does_not_equal: "Done",
           },
@@ -115,7 +115,7 @@ export const markNotified = async (entry: Entry) => {
   await client.pages.update({
     page_id: entry.id,
     properties: {
-      NotifyStatus: {
+      discord: {
         select: {
           name: "Done",
         },
